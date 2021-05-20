@@ -1,13 +1,19 @@
-import React from 'react'
+import React from 'react';
+import LibrayVideo from './LibrayVideo';
+import { State as IProps, Video } from '../App';
 
-interface Props {
-
+export interface Props {
+    library: IProps['library'],
+    handleVideoSelect: (v: Video) => void
 }
 
-const VideoLists: React.FC<Props> = () => {
+const VideoLists: React.FC<Props> = ({ library, handleVideoSelect }) => {
     return (
-        <div>
-            <h3>John Library</h3>
+        <div className='sidebar'>
+            <h4>{library.name.toUpperCase()} Library</h4>
+            {library.videos.map((video) => (
+                <LibrayVideo key={video.id} video={video} handleVideoSelect={handleVideoSelect} />
+            ))}
         </div>
     )
 }
