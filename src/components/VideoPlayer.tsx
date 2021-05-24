@@ -1,5 +1,5 @@
 import React from 'react';
-import { Video as Props } from '../App';
+import { Video as Props } from './Home';
 
 
 const VideoPlayer: React.FC<Props> = ({ id, title }) => {

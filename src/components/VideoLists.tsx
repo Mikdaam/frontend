@@ -1,6 +1,6 @@
 import React from 'react';
 import LibrayVideo from './LibrayVideo';
-import { State as IProps, Video } from '../App';
+import { State as IProps, Video } from './Home';
 
 export interface Props {
     library: IProps['library'],

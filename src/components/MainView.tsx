@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { State as IProps, YoutubeVideo as YVideo } from '../App';
+import { State as IProps, YoutubeVideo as YVideo } from './Home';
 
 import VideoPlayer from './VideoPlayer';
 import YoutubeVideo from './YoutubeVideo';
-import Spinner from './Spinner';
+// import Spinner from './Spinner';
 
 interface Props {
     videoSelected : IProps['selectedVideo'];
@@ -53,7 +53,7 @@ const MainView: React.FC<Props> = ({ videoSelected, search, results, addVideo })
 
     return (
         <div className='main-view'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='form'>
                 <input
                     type='text'
                     placeholder='Make a search .........'
@@ -72,18 +72,44 @@ const MainView: React.FC<Props> = ({ videoSelected, search, results, addVideo })
                     <option value='15' >15</option>
                     <option value='25' >25</option>
                 </select>
-                <input type='submit' value='Rechercher' />
+                <button type='submit'>
+                    <i className="fas fa-search"></i>
+                </button>
             </form>
+            
+            {videoSelected && 
+                ( <VideoPlayer 
+                    id={videoSelected.id} 
+                    title={videoSelected.title} />
+                )
+            }
 
-            {videoSelected && ( <VideoPlayer id={videoSelected.id} title={videoSelected.title} />)}
+            {/* Amélioration avant le mardi 😏🙄 */}
+            {/* { !results.length ? <Spinner /> : results.map((result) => (
+                <YoutubeVideo 
+                    key={result.id}
+                    video={result} 
+                    addVideo={addVideo} 
+                />
+            ))} */}
 
-            { !results.length ? <Spinner /> : results.map((result) => (
+            {results.map((result) => (
                 <YoutubeVideo 
                     key={result.id}
                     video={result} 
                     addVideo={addVideo} 
                 />
             ))}
+
+            {!videoSelected && !results.length && (
+                <div className='center'>
+                    Veuillez faire une recherche
+                    <ul>
+                        <li>Ajouter une video à la bibliothèque</li>
+                        <li>Visualiser la video en cliquant dessus</li>
+                    </ul>
+                </div>
+            )}
 
         </div>
     );

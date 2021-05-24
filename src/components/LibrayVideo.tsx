@@ -19,7 +19,7 @@ const LibrayVideo: React.FC<Props> = ({ video, handleVideoSelect }) => {
                 alt='video_thumbnails' 
                 onClick={() => handleVideoSelect(video)}
             />
-            <h5>{video.title}</h5>
+            <h5 className='title'>{video.title}</h5>
             
         </div>
     )

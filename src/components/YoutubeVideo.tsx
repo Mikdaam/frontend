@@ -1,5 +1,5 @@
 import React from 'react';
-import { YoutubeVideo as IProps } from '../App';
+import { YoutubeVideo as IProps } from './Home';
 
 interface Props {
     video: IProps;
@@ -12,8 +12,10 @@ const YoutubeVideo: React.FC<Props> = ({ video, addVideo }) => {
             <img src={video.imgUrl} alt='Image1' className='youtube-img' />
             <div className='content'>
                 <h2>{video.title}</h2>
-                <p>{video.description}.</p>
-                <button onClick={() => addVideo(video)} >+</button>
+                <p>{video.description}</p>
+                <button onClick={() => addVideo(video)} >
+                    Ajouter à la bibliothèque <i className='far fa-plus-square'></i>
+                </button>
             </div>
         </div>
     );
