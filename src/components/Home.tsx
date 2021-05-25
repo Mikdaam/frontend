@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainView from './MainView';
 import VideoList from './VideoLists';
 
-import { fecthVideos, searchVideos, addVideo } from './../api/index';
+import { fecthVideos, searchVideos, addVideo, deleteVideo } from './../api/index';
 
 export interface Video {
 	id: string;
@@ -70,6 +70,14 @@ const Home = () => {
 		setLibrary(response.data);
 	}
 
+	const deleteVideoLibrary = async (id: string) : Promise<void> => {
+		await deleteVideo(id, result.username);
+		setLibrary({
+			...library,
+			videos: library.videos.filter((video) => video.id !== id)
+		});
+	};
+
 	const handleVideoSelect = (video: State['selectedVideo']) => {
 		setResults([]);
 		setVideoSelected(video);
@@ -78,7 +86,7 @@ const Home = () => {
     return (
         <div className='main'>
             <div className='container'>
-                <VideoList library={library} handleVideoSelect={handleVideoSelect} />
+                <VideoList library={library} deleteVideo={deleteVideoLibrary} handleVideoSelect={handleVideoSelect} />
                 <MainView videoSelected={videoSelected} search={search} results={results} addVideo={addVideoToLibrary} />
             </div>
         </div>

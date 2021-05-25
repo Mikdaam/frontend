@@ -7,10 +7,11 @@ interface Props {
 		id: string,
 		title: string
 	},
-    handleVideoSelect: (v: Props['video']) => void
+    handleVideoSelect: (v: Props['video']) => void;
+    deleteVideo: (id: string) => void;
 }
 
-const LibrayVideo: React.FC<Props> = ({ video, handleVideoSelect }) => {
+const LibrayVideo: React.FC<Props> = ({ video, handleVideoSelect, deleteVideo }) => {
     return (
         <div className='card'>
             <img 
@@ -20,7 +21,9 @@ const LibrayVideo: React.FC<Props> = ({ video, handleVideoSelect }) => {
                 onClick={() => handleVideoSelect(video)}
             />
             <h5 className='title'>{video.title}</h5>
-            
+            <button onClick={() => deleteVideo(video.id)}>
+                Supprimer
+            </button>
         </div>
     )
 }
